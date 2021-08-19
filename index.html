@@ -5,29 +5,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://kit.fontawesome.com/b862bb0d81.js" crossorigin="anonymous"></script>
+    <script defer src="./script.js"></script>
     <title>ToDoList</title>
 </head>
 
 <body>
-    <header>
-        <h2>Todo List</h2>
-    </header>
+    <header></header>
     <section class="list-container">
-        <div class="list">
-            <h3>Pending</h3>
-            <ol>
-                <li>Go to GYM</li>
-                <li>Go for a Jog</li>
-                <li>Finish WOrk</li>
-            </ol>
-        </div>
-        <div class="list">
-            <h3>Completed</h3>
-            <ol>
-                <li><strike>Buy Food</strike></li>
-                <li><strike>Update Phone</strike></li>
-                <li><strike>Order stuff</strike></li>
-            </ol>
+        <div class="container">
+            <h2>Todo List</h2>
+            <div class="list">
+                <div class="list-item">
+                    <input placeholder="Add a task to the List..." type="text" />
+                    <i class="fas fa-plus"></i>
+                </div>
+                <ol class="todo-list"></ol>
+            </div>
         </div>
     </section>
     <footer>

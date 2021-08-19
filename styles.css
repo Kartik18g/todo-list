@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #fff;
+}
+
+header {
+    min-height: 300px;
+    background: url('./images/day.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.list-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.list-container div.container {
+    width: 450px;
+    min-height: 400px;
+    position: absolute;
+    top: -200px;
+    /* text-align: center; */
+}
+
+.list-container div.container h2 {
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+div.list-item {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 10px;
+    border-radius: 5px;
+    height: 40px;
+    opacity: 0.93;
+}
+
+div.list-item input {
+    border: 0px;
+    height: 95%;
+    font-weight: 400;
+    color: rgb(88, 86, 86);
+}
+
+div.list-item input[type="text"],
+div.list-item div.list-input {
+    width: 95%;
+    background-color: transparent;
+    font-size: 1.2rem;
+    padding-left: 10px;
+    color: rgba(0, 0, 0, 0.575);
+}
+
+div.list-item input[type="text"]:focus {
+    border: none;
+    outline: none;
+}
+
+.fas.fa-plus {
+    color: #4f4dde;
+}
+
+.fas.fa-plus:hover {
+    cursor: pointer;
+}
+
+
+/* radio */
+
+.roundedTwo {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    margin: 10px auto;
+    background: #fcfff4;
+}
+
+.roundedTwo label {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    cursor: pointer;
+    background-color: #f6d327;
+    background-image: linear-gradient(315deg, #f6d327 0%, #de4daa 74%);
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+
+.roundedTwo label:after {
+    content: '';
+    width: 9px;
+    height: 5px;
+    position: absolute;
+    top: 5px;
+    left: 4px;
+    border: 2px solid #fcfff4;
+    border-top: none;
+    border-right: none;
+    background: transparent;
+    opacity: 0.2;
+    transform: rotate(-45deg);
+}
+
+.roundedTwo label:hover::after {
+    opacity: 0.9;
+}
+
+.roundedTwo input[type=checkbox] {
+    visibility: hidden;
+}
+
+.roundedTwo input[type=checkbox]:checked+label:after {
+    opacity: 1;
+}
+
+
+/* list */
+
+ol.todo-list {
+    margin-top: 50px;
+}
+
+ol .list-item {
+    margin: 4px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    transition: 1s ease-out;
+}
+
+ol .list-item i {
+    margin: 4px;
+    font-size: 1.1rem;
+}
+
+ol .list-item:hover {
+    cursor: pointer;
+}
+
+ol .list-item:hover.list-item i.fa-times,
+ol .list-item:hover.list-item i.fa-grip-lines {
+    opacity: 1;
+}
+
+ol .list-item i.fa-times,
+ol .list-item i.fa-grip-lines {
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+ol .list-item i.fa-times {
+    color: rgba(220, 20, 60, 0.452);
+}
+
+ol .list-item i.fa-times:hover {
+    color: crimson;
+}
+
+ol .list-item i.fa-grip-lines {
+    color: grey;
+}
+
+ol .list-item i.fa-grip-lines:hover {
+    color: black;
+}
+
+ol .list-item input {
+    font-size: 1.2rem !important;
+}
+
+ol .list-item.remove {
+    transform: translateX(30vw);
+    opacity: 0;
+}
+
+
+/* button at the end */
