@@ -1,14 +1,25 @@
 const list = document.querySelector('ol.todo-list div.items')
 
+const clearList = () => {
+    list.innerHTML = null
+}
 // event listeners
 document.querySelector('.fas.fa-plus').addEventListener('click', () => {
     const input = document.querySelector('.list-item input')
     addChore(input)
 })
+document.querySelector('.clear').addEventListener('click', () => {
+    clearList()
+    // update array
+    chores = []
+    // update localstorage
+    storage('set', 'chores', [])
+    // set total number
+    document.querySelector('.taskbar div:nth-child(1)').innerHTML = `${chores.length} items`
 
-const clearList = () => {
-    list.innerHTML = null
-}
+})
+
+
 
 
 
@@ -100,6 +111,7 @@ const addChore = (input) => {
         chores.push({ name: chore, status: "pending" })
         storage('set', "chores", chores)
         clearList()
+        document.querySelector('.list-item input').value = ""
         renderList(chores)
     }
     chore.length === 0 ? alert("Enter something") : chores.find(item => item.name == chore) ? alert("Chore already exists") : handleValidChore(chore)
