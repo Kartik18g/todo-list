@@ -80,6 +80,14 @@ div.list-item input[type="text"]:focus {
     cursor: pointer;
 }
 
+.strike {
+    text-decoration: line-through !important;
+}
+
+.active {
+    color: #4f4dde !important;
+}
+
 
 /* radio */
 
@@ -129,6 +137,7 @@ div.list-item input[type="text"]:focus {
 
 .roundedTwo input[type=checkbox]:checked+label:after {
     opacity: 1;
+    /* background-color: red; */
 }
 
 
@@ -136,12 +145,40 @@ div.list-item input[type="text"]:focus {
 
 ol.todo-list {
     margin-top: 50px;
+    max-height: 500px;
+    overflow-y: scroll;
+    background-color: #fdfdfd;
+    border-radius: 10px;
 }
 
 ol .list-item {
     margin: 4px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-    transition: 1s ease-out;
+    transition: 0.5s ease-out;
+}
+
+ol .taskbar {
+    font-size: 0.8rem !important;
+    font-weight: 500;
+    color: grey;
+    margin: 0px 10px;
+    opacity: 1;
+    margin: 10px;
+}
+
+ol .taskbar div:nth-child(2) {
+    margin: 0px 5px !important;
+    transition: 0.2s ease;
+}
+
+ol .taskbar div:nth-child(2) div:hover {
+    cursor: pointer;
+    color: #4f4dde;
+}
+
+ol .taskbar div:nth-child(3):hover {
+    cursor: pointer;
+    color: crimson;
 }
 
 ol .list-item i {
@@ -191,3 +228,51 @@ ol .list-item.remove {
 
 
 /* button at the end */
+
+
+/* footer */
+
+footer {
+    background-color: #f1f1f1;
+    color: #111;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+
+footer i {
+    margin: 0px 10px;
+}
+
+footer i.fa-instagram {
+    color: purple;
+}
+
+footer i.fa-linkedin {
+    color: dodgerblue;
+}
+
+footer i.fa-github {
+    color: #111;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: red;
+}
+
+footer a {
+    color: #4f4dde;
+    text-decoration: none;
+}
