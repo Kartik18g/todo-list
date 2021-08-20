@@ -1,27 +1,62 @@
-const list = document.querySelector('ol.todo-list div.items')
+const select = (query) => document.querySelector(query)
+const addClass = (query, value) => select(query).classList.add(value)
+const removeClass = (query, value) => select(query).classList.remove(value)
+const checkForClass = (query, value) => select(query).classList.contains(value)
 
-const clearList = () => {
-    list.innerHTML = null
-}
+let filter = 'all'
+const list = select('ol.todo-list div.items')
+
 // event listeners
-document.querySelector('.fas.fa-plus').addEventListener('click', () => {
-    const input = document.querySelector('.list-item input')
+select('.fas.fa-plus').addEventListener('click', () => {
+    const input = select('.list-item input')
     addChore(input)
 })
-document.querySelector('.clear').addEventListener('click', () => {
+select('.clear').addEventListener('click', () => {
     clearList()
     // update array
     chores = []
     // update localstorage
     storage('set', 'chores', [])
     // set total number
-    document.querySelector('.taskbar div:nth-child(1)').innerHTML = `${chores.length} items`
+    select('.taskbar div:nth-child(1)').innerHTML = `${countItems(chores, filter)} items`
+})
+
+select('#all').addEventListener('click', () => {
+    filter = 'all'
+    if (!checkForClass('#all', 'active')) {
+        addClass("#all", 'active')
+        removeClass("#pending", 'active')
+        removeClass("#complete", 'active')
+        clearList()
+        renderList(chores, 'all')
+    }
 
 })
 
+select('#pending').addEventListener('click', () => {
+    filter = 'pending'
 
+    if (!checkForClass('#pending', 'active')) {
+        addClass("#pending", 'active')
+        removeClass("#all", 'active')
+        removeClass("#complete", 'active')
+        clearList()
+        renderList(chores, 'pending')
+    }
 
+})
 
+select('#complete').addEventListener('click', () => {
+    filter = 'complete'
+    if (!checkForClass('#complete', 'active')) {
+        addClass("#complete", 'active')
+        removeClass("#pending", 'active')
+        removeClass("#all", 'active')
+        clearList()
+        renderList(chores, 'complete')
+    }
+})
+// event listeners
 
 
 const storage = (action, item, data = []) => {
@@ -38,25 +73,55 @@ const storage = (action, item, data = []) => {
     }
 }
 
-const renderList = (chores) => {
+
+const clearList = () => {
+    list.innerHTML = null
+}
+
+const countItems = (chores, filter) => filter === 'all' ? chores.length : chores.filter(item => item.status === filter).length
+
+
+
+
+const renderList = (chores, filter = 'all') => {
 
     // set total number
-    document.querySelector('.taskbar div:nth-child(1)').innerHTML = `${chores.length} items`
+    select('.taskbar div:nth-child(1)').innerHTML = `${countItems(chores, filter)} items`
 
     chores.length > 0 && chores.forEach((chore, iteration) => {
-        var node = document.createElement('div');
-        node.setAttribute('class', 'list-item')
-        node.setAttribute('id', `item-${iteration + 1}`)
-        node.innerHTML = createListItem(chore, iteration + 1)
-        list.appendChild(node);
-        // cross event listener
-        document.querySelector(`i.cross-${iteration + 1}`).addEventListener('click', () => {
-            removeChore(chore.name, `item-${iteration + 1}`)
-        })
-        // check event listener
-        document.querySelector(`#check-${iteration + 1}`).addEventListener('click', () => {
-            handleCheck(chore.name, `check-${iteration + 1}`)
-        })
+
+        if (filter == 'all') {
+            var node = document.createElement('div');
+            node.setAttribute('class', 'list-item')
+            node.setAttribute('id', `item-${iteration + 1}`)
+            node.innerHTML = createListItem(chore, iteration + 1)
+            list.appendChild(node);
+            // cross event listener
+            select(`i.cross-${iteration + 1}`).addEventListener('click', () => {
+                removeChore(chore.name, `item-${iteration + 1}`)
+            })
+            // check event listener
+            select(`#check-${iteration + 1}`).addEventListener('click', () => {
+                handleCheck(chore.name, `check-${iteration + 1}`)
+            })
+
+        } else {
+            if (chore.status === filter) {
+                var node = document.createElement('div');
+                node.setAttribute('class', 'list-item')
+                node.setAttribute('id', `item-${iteration + 1}`)
+                node.innerHTML = createListItem(chore, iteration + 1)
+                list.appendChild(node);
+                // cross event listener
+                select(`i.cross-${iteration + 1}`).addEventListener('click', () => {
+                    removeChore(chore.name, `item-${iteration + 1}`)
+                })
+                // check event listener
+                select(`#check-${iteration + 1}`).addEventListener('click', () => {
+                    handleCheck(chore.name, `check-${iteration + 1}`)
+                })
+            }
+        }
     })
 }
 
@@ -67,7 +132,6 @@ const handleCheck = (chore, id) => {
     chores[index] = { name: item.name, status: item.status === 'pending' ? 'complete' : 'pending' }
     // save to storage
     storage('set', 'chores', chores)
-
     clearList()
     renderList(chores)
 }
@@ -88,7 +152,7 @@ const createListItem = (chore, id) => {
 }
 
 const removeChore = (chore, id) => {
-    const itemToRemove = document.querySelector(`#${id}`)
+    const itemToRemove = select(`#${id}`)
     itemToRemove.classList.add("remove")
 
     setTimeout(() => {
@@ -99,7 +163,7 @@ const removeChore = (chore, id) => {
         // update the markup
         list.removeChild(itemToRemove)
         // set total number
-        document.querySelector('.taskbar div:nth-child(1)').innerHTML = `${chores.length} items`
+        select('.taskbar div:nth-child(1)').innerHTML = `${countItems(chores, filter)} items`
     }, 500)
 
 
@@ -111,17 +175,17 @@ const addChore = (input) => {
         chores.push({ name: chore, status: "pending" })
         storage('set', "chores", chores)
         clearList()
-        document.querySelector('.list-item input').value = ""
-        renderList(chores)
+        select('.list-item input').value = ""
+        renderList(chores, filter)
     }
     chore.length === 0 ? alert("Enter something") : chores.find(item => item.name == chore) ? alert("Chore already exists") : handleValidChore(chore)
+    select('.taskbar div:nth-child(1)').innerHTML = `${countItems(chores, filter)} items`
+
 }
 
 
-
 let chores = storage('get', 'chores') ? storage('get', 'chores') : []
-console.log(chores)
 
+renderList(chores, filter)
 
-renderList(chores)
 
