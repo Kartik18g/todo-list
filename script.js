@@ -6,7 +6,17 @@ const checkForClass = (query, value) => select(query).classList.contains(value)
 let filter = 'all'
 const list = select('ol.todo-list div.items')
 
+
 // event listeners
+
+select('#switch').addEventListener('click', () => {
+    // select('body').toggleClass('dark')
+
+    // console.log(select('body'))
+    storage('set', "mode", checkForClass('body', 'dark') ? 'light' : 'dark')
+    select('body').classList.toggle('dark')
+})
+
 select('.fas.fa-plus').addEventListener('click', () => {
     const input = select('.list-item input')
     addChore(input)
@@ -169,6 +179,10 @@ const removeChore = (chore, id) => {
 
 }
 
+
+// let mode = storage('get', 'mode') ? storage('get', 'mode') : 'light'
+// console.log(mode)
+// addClass('body', mode)
 const addChore = (input) => {
     const { value: chore } = input
     const handleValidChore = (chore) => {

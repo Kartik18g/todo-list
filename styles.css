@@ -8,6 +8,11 @@
 
 body {
     background-color: #fff;
+    transition: 0.3s ease;
+}
+
+body.dark {
+    background-color: #000;
 }
 
 header {
@@ -15,6 +20,18 @@ header {
     background: url('./images/day.jpeg');
     background-size: cover;
     background-position: center;
+    transition: 0.3 ease;
+}
+
+body.dark header {
+    background-color: #2929294b;
+    background-blend-mode: multiply;
+}
+
+.container h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .list-container {
@@ -52,11 +69,21 @@ div.list-item {
     opacity: 0.93;
 }
 
+body.dark div.list-item {
+    background-color: #363636;
+}
+
 div.list-item input {
     border: 0px;
     height: 95%;
     font-weight: 400;
     color: rgb(88, 86, 86);
+}
+
+body.dark div.list-item,
+body.dark div.list-item input,
+body.dark::placeholder {
+    color: #f1f1f1 !important;
 }
 
 div.list-item input[type="text"],
@@ -98,6 +125,15 @@ div.list-item input[type="text"]:focus {
     position: relative;
     margin: 10px auto;
     background: #fcfff4;
+    border-radius: 50%;
+}
+
+body.dark .roundedTwo {
+    background: grey;
+}
+
+body.dark .list-input {
+    color: #f1f1f1 !important;
 }
 
 .roundedTwo label {
@@ -152,6 +188,10 @@ ol.todo-list {
     border-radius: 10px;
 }
 
+body.dark ol.todo-list {
+    background-color: #1E1E1E;
+}
+
 ol .list-item {
     margin: 4px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
@@ -168,7 +208,7 @@ ol .taskbar {
 }
 
 ol .taskbar div:nth-child(2) {
-    margin: 0px 5px !important;
+    margin: 0px 10px !important;
     transition: 0.2s ease;
 }
 
@@ -247,6 +287,11 @@ footer {
     align-items: center;
     justify-content: space-between;
     font-size: 1.2rem;
+    transition: 0.3s ease;
+}
+
+body.dark footer {
+    background-color: #292929;
 }
 
 footer i {
@@ -265,6 +310,14 @@ footer i.fa-github {
     color: #111;
 }
 
+body.dark footer i.fa-github {
+    color: #f1f1f1
+}
+
+body.dark footer i.fa-instagram {
+    color: #de4daa
+}
+
 footer p {
     margin: 10px 0;
 }
@@ -276,4 +329,53 @@ footer i {
 footer a {
     color: #4f4dde;
     text-decoration: none;
+}
+
+
+/* top checkbox */
+
+#switch {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label.switch-label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 70px;
+    height: 35px;
+    background: #fff;
+    display: block;
+    border-radius: 10px;
+    position: relative;
+}
+
+label.switch-label:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 25px;
+    height: 25px;
+    background: #f6d327;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+input#switch:checked+label.switch-label {
+    background: #111;
+}
+
+input#switch:checked+label.switch-label:after {
+    background: #E63E6D;
+}
+
+input#switch:checked+label.switch-label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+label.switch-label:active:after {
+    width: 80px;
 }
